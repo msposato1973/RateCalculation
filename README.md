@@ -29,8 +29,8 @@ Maven
 
 From the folder where jar is kept run below file via command prompt
 
- #  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
- #### Example:: java -jar C:\Zopa_Workspace\Zopa\src\test\resources\MarketDataforExercise.csv 1500
+ ##  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
+ ## Example:: java -jar C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
 
 ## Testing
 This application is built using TDD methodology and tests are written in Junit
