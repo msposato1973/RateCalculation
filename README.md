@@ -43,8 +43,11 @@ This application is built using TDD methodology and tests are written in Junit
 
 ## The application should produce output in the form example:
 Requested amount: £1000
+
 Rate: 7.0%
+
 Monthly repayment: £30.78
+
 Total repayment: £1108.10
  
 
