@@ -64,6 +64,8 @@ public class Application {
 	    System.out.println(QuoteConstant.MSG_RATE + String.format("%.1f", finalQuote.getRate() * 100) + "%" );
         System.out.println(QuoteConstant.MSG_MonthlyRepayment +  String.format("%.2f", finalQuote.getMonthlyRepayment()));
         System.out.println(QuoteConstant.MSG_TotalRepayment + String.format("%.2f", finalQuote.getTotalRepayment()));
+        
+         
 		
 	}
 

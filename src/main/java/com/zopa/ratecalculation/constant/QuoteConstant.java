@@ -24,7 +24,7 @@ public class QuoteConstant {
     public static final String ERR_AMOUNT_REQUEST = "The requested amount is not incremental of 100";
     
     public final static String MSG_Amount = "Requested amount: £";
-    public final static String MSG_RATE = "Rate in % : ";
-    public final static String MSG_MonthlyRepayment = "Monthly repayment : £";
-    public final static String MSG_TotalRepayment = "Total repayment:£ ";
+    public final static String MSG_RATE = "Rate: in % : ";
+    public final static String MSG_MonthlyRepayment = "Monthly repayment: £";
+    public final static String MSG_TotalRepayment   = "Total repayment: £";
 }

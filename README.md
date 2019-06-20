@@ -20,8 +20,10 @@ inform the borrower that it is not possible to provide a quote at that time.
 If a lender has insufficient requested amount then we will take the maximum from him and rest can be taken from other lenders and rate will be the average rate
 
 ## Prerequisites
-JDK 1.8
-Maven
+You need to install the following tools
+
+* [Java 1.8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) - Lambda and Annotation were used in the code
+* [Maven](https://maven.apache.org/) - Dependency Management
 
 ## Running the Application locally
 1. Duration, Maximum and minimum loan amount are confiurable in a constant class
@@ -29,8 +31,8 @@ Maven
 
 From the folder where jar is kept run below file via command prompt
 
- ##  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
- ## Example:: java -jar C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
+###  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
+### Example:: java -jar RateCalculation C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
 
 ## Testing
 This application is built using TDD methodology and tests are written in Junit
@@ -38,4 +40,9 @@ This application is built using TDD methodology and tests are written in Junit
 ### TODO
 1.Can be converted into Spring boot Application if enhacement comes
 2.Logs implementation
+
 ## The application should produce output in the form:
+Requested amount: £1000
+Rate: 7.0%
+Monthly repayment: £30.78
+Total repayment: £1108.10
