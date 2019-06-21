@@ -7,82 +7,111 @@ import java.math.BigDecimal;
  * @author maxp
  *
  */
+import java.math.BigDecimal;
+
 public class Offer implements Comparable<Offer> {
 
-	/**
-     * Lender Name Lender,Rate,Available
-     */
-    private String lender;
+    private final String lender;
+    private final double rate;
+    private final BigDecimal availableAmount;
+    private BigDecimal neededAmount;
+    private BigDecimal monthlyPayment;
 
     /**
-     * Rate.
+     * @param lender
+     * @param rate
+     * @param availableAmount
      */
-    private double rate;
-
-    /**
-     * Amount available with lenders.
-     */
-    private double available;
-    
-    public Offer( double rate, double available) {
-         this.rate = rate;
-        this.available = available;
-    }
-
-    public Offer(String lender, double rate, double available) {
+    public Offer(String lender, double rate, BigDecimal availableAmount) {
         this.lender = lender;
         this.rate = rate;
-        this.available = available;
+        this.availableAmount = availableAmount;
     }
 
-   
+    public Offer() {
+
+        lender = null;
+        rate = 0;
+        availableAmount = BigDecimal.valueOf(0);
+    }
 
     @Override
-    public int compareTo(Offer offer) {
-        if (this.getRate() == offer.getRate())
-            return 0;
-        else {
-            return this.getRate() > offer.getRate() ? 1 : -1;
-        }
+    public String toString() {
+        return this.getLender() + ' ' + this.getRate() + ' ' + this.getAvailableAmount();
     }
 
-	@Override
-	public String toString() {
-		return "Offer [lender=" + lender + ", rate=" + rate + ", available=" + available + "]";
-	}
+    /**
+     * @return Lender
+     */
+    public String getLender() {
+        return lender;
+    }
 
-	public String getLender() {
-		return lender;
-	}
-
-	public void setLender(String lender) {
-		this.lender = lender;
-	}
-
-	public void setRate(double rate) {
-		this.rate = rate;
-	}
-
-	public void setAvailable(double available) {
-		this.available = available;
-	}
-	 /**
-     * Get the Rate.
-     *
-     * @return rate
+    /**
+     * @return Loan rate
      */
     public double getRate() {
         return rate;
     }
 
     /**
-     * Get Available Amount.
-     *
-     * @return Available Amount
+     * @return Available amount
      */
-    public double getAvailable() {
-        return available;
+    public BigDecimal getAvailableAmount() {
+        return availableAmount;
     }
 
+    @Override
+    public int compareTo(Offer o) {
+        if (this.getRate() == o.getRate())
+            return 0;
+        else
+            return this.getRate() > o.getRate() ? 1 : -1;
+    }
 
+    /**
+     * @param obj
+     * @return
+     */
+    @Override
+    public boolean equals(Object obj) {
+        Offer objOffer = (Offer) obj;
+
+        return this.getRate() == objOffer.getRate() &&
+                this.getAvailableAmount() == objOffer.getAvailableAmount() &&
+                this.getLender() == objOffer.getLender();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    /**
+     * @param neededAmount
+     */
+    public void setNeededAmount(BigDecimal neededAmount) {
+        this.neededAmount = neededAmount;
+    }
+
+    /**
+     * @return the needed amount
+     */
+    public BigDecimal getNeededAmount() {
+        return neededAmount;
+    }
+
+    /**
+     * @param monthlyPayment set the monthly payment
+     */
+    public void setMonthlyPayment(BigDecimal monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
+    }
+
+    /**
+     * @return returns the monthly payment
+     */
+    public BigDecimal getMonthlyPayment() {
+        return monthlyPayment;
+    }
 }

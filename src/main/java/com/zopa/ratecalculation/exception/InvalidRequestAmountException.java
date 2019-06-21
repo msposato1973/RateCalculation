@@ -1,5 +1,11 @@
 package com.zopa.ratecalculation.exception;
 
+
+/***
+ * 
+ * @author maxp
+ *
+ */
 public class InvalidRequestAmountException extends RuntimeException {
 
 	/**

@@ -28,10 +28,12 @@ class CsvFileReaderServiceImplTest {
 		
 		try {
 			
-			List<Offer> offers = cvsReaderService.readAndProcessFile();
+			List<Offer> offers = cvsReaderService.getAvailableOffers();
 			Assert.assertNotNull(offers);
 			assertEquals("Confirm that 7 offers have been loaded", 7, offers.size());
+			
 			offers.forEach(System.out::println);
+			Assert.assertNotNull(offers);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -42,7 +44,7 @@ class CsvFileReaderServiceImplTest {
 	@Test
     public void getLastAvailableOffersSortedLast() throws IOException {
         // Arrange
-        List<Offer> offers = cvsReaderService.readAndProcessFile();
+        List<Offer> offers = cvsReaderService.getAvailableOffers();
 
         // Assert
         assertEquals("The last after sort should be Mary", "Mary", offers.get(6).getLender());
@@ -50,14 +52,22 @@ class CsvFileReaderServiceImplTest {
 	
 	
 	@Test
-    public void getFistAvailableOffersSortedLast() throws IOException {
+    public void getAvailableOffersSortedFirst() throws IOException {
         // Arrange
-        List<Offer> offers = cvsReaderService.readAndProcessFile();
+        List<Offer> offers = cvsReaderService.getAvailableOffers();
 
         // Assert
         assertEquals("The first after sort should be Jane", "Jane", offers.get(0).getLender());
     }
 	
+	@Test
+    public void getLastAvailableOffersSortedSecond() throws IOException {
+        // Arrange
+        List<Offer> offers = cvsReaderService.getAvailableOffers();
+
+        // Assert
+        assertEquals("The second  sort should be Fred", "Fred", offers.get(1).getLender());
+    }
 	 
 
 

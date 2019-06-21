@@ -1,8 +1,11 @@
 package com.zopa.ratecalculation.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.zopa.ratecalculation.exception.NoAvailableOffersException;
 import com.zopa.ratecalculation.model.Offer;
 
 /**
@@ -12,14 +15,15 @@ import com.zopa.ratecalculation.model.Offer;
  */
 public interface CVSReaderService {
 
-	/**
-     * Read and process a file
-     *
-     * @param filePath
-     * @return
-     * @throws IOException
+	  /**
+     * @return List of offers
      */
-    List<Offer> readAndProcessFile() throws IOException;
-    
+    default List<Offer> getLoanOffers(BigDecimal requestedAmount,List<Offer> offerList) throws NoAvailableOffersException, IOException {
+        return new ArrayList<>();
+    }
+
+    default List<Offer> getAvailableOffers() throws NoAvailableOffersException, IOException {
+        return new ArrayList<>();
+    }
     
 }

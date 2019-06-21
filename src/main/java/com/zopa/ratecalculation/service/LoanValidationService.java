@@ -4,6 +4,20 @@ import com.zopa.ratecalculation.exception.InvalidRequestAmountException;
 import com.zopa.ratecalculation.model.Loan;
 
 public interface LoanValidationService {
-	  boolean isNumeric(String requestedAmountArg) throws InvalidRequestAmountException;
-	  boolean validateLoad(Loan loan) throws  Exception; 
+	/**
+     * @param requestedAmountArg
+     * @return
+     */
+    default boolean isNumeric(String requestedAmountArg) {
+		return false;
+	}
+
+    /**
+     * @param loan detail
+     * @return sucess/fail
+     * @throws InvalidRequestAmountException
+     */
+    default boolean validate(Loan loan) throws InvalidRequestAmountException {
+		return false;
+	}
 }

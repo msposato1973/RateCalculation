@@ -12,14 +12,23 @@ public class LoanValidationServiceImpl implements LoanValidationService {
 
 	public LoanValidationServiceImpl() {}
 	 
-	@Override
-	public boolean isNumeric(String requestedAmount) throws InvalidRequestAmountException {
-		// TODO Auto-generated method stub
-		return requestedAmount != null && requestedAmount.matches("[-+]?\\d*\\.?\\d+");
-	}
+	/**
+     * @param requestedAmountArg
+     * @return
+     * @throws InvalidRequestAmountException
+     */
+    @Override
+    public boolean isNumeric(String requestedAmountArg) {
+        return requestedAmountArg != null && requestedAmountArg.matches(QuoteConstant.MATCH_PATTERN);
+    }
 
-	@Override
-	public boolean validateLoad(Loan loan) throws InvalidRequestAmountException {
+    /**
+     * @param loan detail
+     * @return
+     * @throws InvalidRequestAmountException
+     */
+    @Override
+    public boolean validate(Loan loan) throws InvalidRequestAmountException {
 
         if (loan.getRequestedAmount().compareTo(QuoteConstant.LOWER_RANGE) < 0 || loan.getRequestedAmount().compareTo(QuoteConstant.UPPER_RANGE) > 0) {
             throw new InvalidRequestAmountException(QuoteConstant.ERR_AMOUNT_RANGE);
@@ -31,6 +40,6 @@ public class LoanValidationServiceImpl implements LoanValidationService {
             throw new InvalidRequestAmountException(QuoteConstant.ERR_AMOUNT_REQUEST);
 
         return true;
-	}
+    }
 
 }

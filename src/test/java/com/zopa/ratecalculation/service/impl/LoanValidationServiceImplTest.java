@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.zopa.ratecalculation.model.Loan;
-import com.zopa.ratecalculation.server.CommandService;
-import com.zopa.ratecalculation.server.CommandServiceImpl;
 import com.zopa.ratecalculation.service.LoanValidationService;
 
 class LoanValidationServiceImplTest {
@@ -18,12 +16,11 @@ class LoanValidationServiceImplTest {
 	private String[] args;
 	private String loanArg = "1000";
 	private LoanValidationService loanValidationService;
-	private CommandService cs;
+	private String filePath = "src/test/resources/MarketDataforExercise.csv";
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		cs = new CommandServiceImpl();
-		args = new String[] {"",loanArg};
+		    args = new String[] {filePath,loanArg};
 			loanValidationService = new LoanValidationServiceImpl() ;
 		}
 		
@@ -43,19 +40,10 @@ class LoanValidationServiceImplTest {
 		boolean condition = false;
 		Loan loan = new Loan(new BigDecimal(loanAmount));
 		Assert.assertNotNull(loan);
-		condition = loanValidationService.validateLoad(loan);
+		condition = loanValidationService.validate(loan);
 		assertTrue(condition);
 	}
 	
-	@Test
-	void testCommandServiceValidate() throws Exception {
-		
-		Integer loanAmount = Integer.valueOf(args[1]);
-		boolean condition = false;
-		
-		Loan loan = new Loan(new BigDecimal(loanAmount));
-		condition = cs.invoceAmountValidationService(loan);
-		assertTrue(condition);
-	}
+	 
 
 }

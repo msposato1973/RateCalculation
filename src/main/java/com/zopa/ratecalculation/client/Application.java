@@ -4,69 +4,77 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.zopa.ratecalculation.constant.QuoteConstant;
+import com.zopa.ratecalculation.exception.InsufficientLoanAmountException;
 import com.zopa.ratecalculation.exception.InvalidRequestAmountException;
+import com.zopa.ratecalculation.exception.InvalideQuoteException;
 import com.zopa.ratecalculation.exception.NoAvailableOffersException;
 import com.zopa.ratecalculation.model.Loan;
 import com.zopa.ratecalculation.model.Offer;
 import com.zopa.ratecalculation.model.Quote;
 import com.zopa.ratecalculation.server.CommandService;
 import com.zopa.ratecalculation.server.CommandServiceImpl;
+ 
 
 public class Application {
 
- 
+    
 	 
-	public static void main(String[] args) {
+	  /**
+	   * 
+	   * @param args supplied file path and loan amount
+	   * @throws Exception and InvalidRequestAmountException,InsufficientLoanAmountException, InvalideQuoteException
+	   *    
+       */
+     public static void main(String[] args) {
+    	 
+    	 CommandService commandService = new CommandServiceImpl();
+    	 List<Offer> offerList = null;
+    	 try {
+    		 
+    		 // Offers should only be obtained if request is valid
+    		 // Create and initialize the calculation service
+    		 // Create and initialize the offer service
+    		 
+    		 if (args.length < 2 ) {
+    				throw new IllegalArgumentException(QuoteConstant.ERR);
+    		 }else if((args[0] ==null || args[0].equals(""))) {
+    				throw new IllegalArgumentException(QuoteConstant.ERR);
+    		 }else if((args[1] ==null || args[1].equals(""))) {
+    			 throw new IllegalArgumentException(QuoteConstant.ERR_LOAN);
+    		 }
+    		 
+			 String filePath = new  String(args[0]);
+			 if(!filePath.endsWith(".csv")) {
+ 				throw new NoAvailableOffersException(QuoteConstant.OFF_ERR_MESSAGE);
+ 		     }else {
+ 		    	
+ 		    	offerList = commandService.invoceCvsReaderService(filePath);
+ 		     }
+			 
+			 String loanAmount = new  String(args[1]);
+			 if(!commandService.invoceLoanValidationService(loanAmount)) {
+				 throw new InsufficientLoanAmountException(QuoteConstant.OFF_ERR_MESSAGE);
+			 }
+			 
+			 Loan loan = new Loan(new BigDecimal(loanAmount));
+			 Quote quote =  commandService.ivoceCalculationService(loan, offerList);
+			 
+	        
+	         commandService.printQuote(quote);
 		
-		 CommandService commandServ = new CommandServiceImpl();
-		 List<Offer> offers = null;
-		
-		// TODO Auto-generated method stub
-		if (args.length < 2 ) {
-			throw new IllegalArgumentException(QuoteConstant.ERR);
-		}
-		
-		if (args[0] ==null || args[0].equals("") ) {
-			throw new IllegalArgumentException(QuoteConstant.ERR);
-		}
-		
-		Integer loanAmount = Integer.valueOf(args[1]);
-		Loan loan = new Loan(new BigDecimal(loanAmount));
+    	 } catch (InvalidRequestAmountException e) {
+             System.out.println(e.getMessage());
+         } catch (InsufficientLoanAmountException e) {
+             System.out.println(e.getMessage());
+         }  catch (InvalideQuoteException e) {
+             System.out.println(e.getMessage());
+         } catch (Exception e) {
 			
-		try {
-		
-			if(!commandServ.invoceAmountValidationService(loan)) 
-				throw new IllegalArgumentException(QuoteConstant.ERR);
-			
-		 
-			String csvFile = args[0];
-			offers = commandServ.invoceCvsReaderService(csvFile);
-			
-			Quote finalQuote = commandServ.ivoceCalculationService(loan, offers);
-			displayOutputForm(finalQuote, loan);
-			
-			System.exit(0);
-			
-		} catch (InvalidRequestAmountException e) {
-            System.out.println(e.getMessage());
-        } catch (NoAvailableOffersException e) {
-            System.out.println(e.getMessage());
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-		
-		
-	 
-	}
-	private static void displayOutputForm(final Quote finalQuote,final Loan loan) {
-		
-		System.out.println(QuoteConstant.MSG_Amount + String.format("%.0f", loan.getRequestedAmount()));
-	    System.out.println(QuoteConstant.MSG_RATE + String.format("%.1f", finalQuote.getRate() * 100) + "%" );
-        System.out.println(QuoteConstant.MSG_MonthlyRepayment +  String.format("%.2f", finalQuote.getMonthlyRepayment()));
-        System.out.println(QuoteConstant.MSG_TotalRepayment + String.format("%.2f", finalQuote.getTotalRepayment()));
-        
+			e.printStackTrace();
+		 }
          
-		
 	}
+     
+     
 
 }

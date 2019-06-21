@@ -23,4 +23,9 @@ public class Loan {
     public BigDecimal getRequestedAmount() {
         return requestedAmount;
     }
+    
 }
+
+ 
+
+ 

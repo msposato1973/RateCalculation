@@ -1,159 +1,60 @@
 package com.zopa.ratecalculation.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Quote {
-	/**
-     * Requested Amount.
-     */
-    private BigDecimal requestedAmount;
-
-    /**
-     * rate.
-     */
-    private double rate;
-
-    /**
-     * Monthly repayment.
-     */
-    private double monthlyRepayment;
-
-    /**
-     * Total Repayment.
-     */
-    private double totalRepayment;
-
-	public Quote(BigDecimal requestedAmount, double rate, double monthlyRepayment, double totalRepayment) {
-		super();
-		this.requestedAmount = requestedAmount;
-		this.rate = rate;
-		this.monthlyRepayment = monthlyRepayment;
-		this.totalRepayment = totalRepayment;
-	}
-	
-	/**
-     * Constructor
-     *
-     * @param requestedAmount
-     */
-    public Quote(BigDecimal requestedAmount) {
-        this.requestedAmount = requestedAmount;
-    }
-    
-    /**
-     * Get Requested Amount.
-     *
-     * @return requested amount
-     */
-    public BigDecimal getRequestedAmount() {
-        return requestedAmount;
-    }
-
-    /**
-     * Set Requested Amount
-     *
-     * @param requestedAmount
-     */
-    public void setRequestedAmount(final BigDecimal requestedAmount) {
-        this.requestedAmount = requestedAmount;
-    }
-
-    /**
-     * Get Rate.
-     *
-     * @return rate
-     */
-    public double getRate() {
-        return rate;
-    }
-
-    /**
-     * Set Rate
-     *
-     * @param rate
-     */
-    public void setRate(final double rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * Get Monthly Repayment
-     *
-     * @return Monthly Repayment
-     */
-    public double getMonthlyRepayment() {
-        return monthlyRepayment;
-    }
-
-    /**
-     * Set Monthly Repayment.
-     *
-     * @param monthlyRepayment
-     */
-    public void setMonthlyRepayment(final double monthlyRepayment) {
-        this.monthlyRepayment = monthlyRepayment;
-    }
-
-    /**
-     * Get Total Repayment.
-     *
-     * @return total repayment
-     */
-    public double getTotalRepayment() {
-        return totalRepayment;
-    }
-
-    /**
-     * Set Total Repayment
-     *
-     * @param totalRepayment
-     */
-    public void setTotalRepayment(final double totalRepayment) {
-        this.totalRepayment = totalRepayment;
-    }
-
-	@Override
-	public String toString() {
-		return "Quote [requestedAmount=" + requestedAmount + ", rate=" + rate + ", monthlyRepayment=" + monthlyRepayment
-				+ ", totalRepayment=" + totalRepayment + "]";
-	}
-
+	 public static final BigDecimal MONTHS_IN_YEAR = new BigDecimal(12);
 	 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(monthlyRepayment);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(rate);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((requestedAmount == null) ? 0 : requestedAmount.hashCode());
-		temp = Double.doubleToLongBits(totalRepayment);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
+	 private final BigDecimal  requestedAmount;
+	 private final double  rate;
+	 private final BigDecimal monthlyRepayment;
+	 private final BigDecimal totalRepayment;
+
+	
+	
+	
+	public Quote(BigDecimal  requestedAmount, double  rate, BigDecimal monthlyRepayment, BigDecimal totalRepayment) {
+			this.requestedAmount = requestedAmount;
+			this.rate = rate;
+			this.monthlyRepayment = monthlyRepayment;
+			this.totalRepayment = totalRepayment;
+		}
+
+
+
+
+	private BigDecimal  formatRate(BigDecimal rate) {
+        return rate.multiply(new BigDecimal(100))
+                .multiply(MONTHS_IN_YEAR)
+                .setScale(1, RoundingMode.HALF_EVEN);
+    }
+
+
+
+
+	public BigDecimal  getRequestedAmount() {
+		return requestedAmount;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Quote other = (Quote) obj;
-		if (Double.doubleToLongBits(monthlyRepayment) != Double.doubleToLongBits(other.monthlyRepayment))
-			return false;
-		if (Double.doubleToLongBits(rate) != Double.doubleToLongBits(other.rate))
-			return false;
-		if (requestedAmount == null) {
-			if (other.requestedAmount != null)
-				return false;
-		} else if (!requestedAmount.equals(other.requestedAmount))
-			return false;
-		if (Double.doubleToLongBits(totalRepayment) != Double.doubleToLongBits(other.totalRepayment))
-			return false;
-		return true;
+
+
+
+	public double  getRate() {
+		return rate;
+	}
+
+
+
+
+	public BigDecimal getMonthlyRepayment() {
+		return monthlyRepayment;
+	}
+
+
+
+
+	public BigDecimal getTotalRepayment() {
+		return totalRepayment;
 	}
 }

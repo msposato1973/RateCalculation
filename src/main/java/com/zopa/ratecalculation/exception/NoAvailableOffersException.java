@@ -1,5 +1,7 @@
 package com.zopa.ratecalculation.exception;
 
+import com.zopa.ratecalculation.constant.QuoteConstant;
+
 /**
  * 
  * @author maxp
@@ -7,11 +9,10 @@ package com.zopa.ratecalculation.exception;
  */
 public class NoAvailableOffersException extends RuntimeException {
 
-	private static final String DEF_ERR_MESSAGE = "No offers available to provide loan";
-	private static final long serialVersionUID = 1L;
+	 private static final long serialVersionUID = 1L;
 
 	public NoAvailableOffersException() {
-		super(DEF_ERR_MESSAGE);
+		super(QuoteConstant.DEF_ERR_MESSAGE);
 	}
 
 	public NoAvailableOffersException(String message) {

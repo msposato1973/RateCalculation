@@ -1,32 +1,35 @@
 package com.zopa.ratecalculation.service;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import com.zopa.ratecalculation.model.Loan;
-import com.zopa.ratecalculation.model.Offer;
 import com.zopa.ratecalculation.model.Quote;
 
 public interface CalculationService {
-   /**
-	     * @return 
-	     * @return Returns average rate
-	     */
-	     double getAverageRate(List<Offer> availableOffers) ;
+	/**
+     * @return Returns average rate
+     */
+	default double getAverageRate() {
+		return 0;
+	}
 
-	    /**
-	     * @return Returns monthly payment
-	     */
-	     
-	     
-	    
-	     
-	    
-	    /**
-	     * 
-	     * @param loan
-	     * @param offers
-	     * @return
-	     */
-	    Quote getQuote(Loan loan, List<Offer> offers);
-	 
+    /**
+     * @return Returns monthly payment
+     */
+	default BigDecimal getMonthlyPayment() {
+		return null;
+	}
+
+    /**
+     * @return Returns Total payment
+     */
+	default  BigDecimal getTotalPayment() {
+		return null;
+	}
+    
+    /**
+     * @return Returns Quote quote
+     */
+	default Quote getQuote(BigDecimal requestedAmount) {
+		return null;
+	}
 }

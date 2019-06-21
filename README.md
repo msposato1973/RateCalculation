@@ -32,7 +32,8 @@ You need to install the following tools
 From the folder where jar is kept run below file via command prompt
 
 ###  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
-### Example:: java -jar RateCalculation C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
+### Example:: 
+java -jar RateCalculation C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
 
 ## Testing
 This application is built using TDD methodology and tests are written in Junit
