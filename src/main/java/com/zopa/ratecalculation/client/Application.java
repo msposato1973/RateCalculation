@@ -3,6 +3,8 @@ package com.zopa.ratecalculation.client;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.zopa.ratecalculation.constant.QuoteConstant;
 import com.zopa.ratecalculation.exception.InsufficientLoanAmountException;
 import com.zopa.ratecalculation.exception.InvalidRequestAmountException;
@@ -17,7 +19,7 @@ import com.zopa.ratecalculation.server.CommandServiceImpl;
 
 public class Application {
 
-    
+	private static final Logger loggerApplication = Logger.getLogger(Application.class);
 	 
 	  /**
 	   * 
@@ -27,14 +29,18 @@ public class Application {
        */
      public static void main(String[] args) {
     	 
+    	if (loggerApplication.isDebugEnabled()) {
+    		loggerApplication.debug("getLocalCurrentDate() is executed!");
+ 		}
+    	 
     	 CommandService commandService = new CommandServiceImpl();
     	 List<Offer> offerList = null;
     	 try {
     		 
-    		 // Offers should only be obtained if request is valid
-    		 // Create and initialize the calculation service
-    		 // Create and initialize the offer service
-    		 
+    		 loggerApplication.debug("Offers should only be obtained if request is valid");
+    		 loggerApplication.debug("Create and initialize the calculation service");
+    		 loggerApplication.debug("Create and initialize the offer service");
+    	 	 
     		 if (args.length < 2 ) {
     				throw new IllegalArgumentException(QuoteConstant.ERR);
     		 }else if((args[0] ==null || args[0].equals(""))) {
@@ -63,7 +69,7 @@ public class Application {
 	         commandService.printQuote(quote);
 		
     	 } catch (InvalidRequestAmountException e) {
-             System.out.println(e.getMessage());
+    		 System.out.println(e.getMessage());
          } catch (InsufficientLoanAmountException e) {
              System.out.println(e.getMessage());
          }  catch (InvalideQuoteException e) {

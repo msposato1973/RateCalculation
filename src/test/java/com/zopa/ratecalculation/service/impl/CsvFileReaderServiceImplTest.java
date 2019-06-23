@@ -6,24 +6,27 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import com.zopa.ratecalculation.model.Offer;
 import com.zopa.ratecalculation.service.CVSReaderService;
 
-class CsvFileReaderServiceImplTest {
+@RunWith(JUnit4.class)
+public class CsvFileReaderServiceImplTest {
 
 	private CVSReaderService cvsReaderService;
 	private String filePath = "src/test/resources/MarketDataforExercise.csv";
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		cvsReaderService = new CsvFileReaderServiceImpl(filePath);
 	}
 
 	@Test
-	void testReadAndProcessFile() {
+	public void testReadAndProcessFile() {
 		System.out.println("filePath : " + filePath);
 		
 		try {

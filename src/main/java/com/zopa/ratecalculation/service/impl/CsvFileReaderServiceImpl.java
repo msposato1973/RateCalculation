@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
 import com.zopa.ratecalculation.exception.NoAvailableOffersException;
 import com.zopa.ratecalculation.model.Offer;
 import com.zopa.ratecalculation.service.CVSReaderService;
@@ -16,6 +18,8 @@ import com.zopa.ratecalculation.service.CVSReaderService;
  
 
 public class CsvFileReaderServiceImpl implements CVSReaderService{
+	
+	//private static final Logger logger = Logger.getLogger(CsvFileReaderServiceImpl.class);
 	 
 	private final List<Offer> offers = new ArrayList<>();
     private final String filepath;
@@ -32,8 +36,7 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
      */
     @Override
     public List<Offer> getLoanOffers(BigDecimal requestedAmount, List<Offer> offerList) throws IOException, NoAvailableOffersException {
-
-        // Calculate available sum
+    	 // Calculate available sum
         BigDecimal sumAvailableAmount = offers.stream().map(t -> t.getAvailableAmount()).reduce(BigDecimal.valueOf(0), (a, b) -> a.add(b));
 
         if (sumAvailableAmount.compareTo(requestedAmount) < 0)
@@ -56,15 +59,13 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
             }
         }
 
-        return applicableOffers;
+         return applicableOffers;
     }
 
     public List<Offer> getAvailableOffers() throws IOException, NoAvailableOffersException {
-
-        // process excel file
+    	 // process excel file
         processFile();
-
-        // Sorting ensures that we use offer with lowest rate first
+      // Sorting ensures that we use offer with lowest rate first
         return offers.stream().sorted().collect(Collectors.toList());
     }
 
@@ -72,7 +73,7 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
      * @throws IOException
      */
     private void processFile() throws IOException {
-        
+    	 
     	BufferedReader reader = null;
 
         try {
@@ -94,7 +95,10 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
             throw e;
         } finally {
             if (reader != null) reader.close();
+             
         }
+        
+        
         
     }
 
@@ -103,7 +107,7 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
      * @throws IllegalArgumentException
      */
     private void processSignleLine(String line) throws IllegalArgumentException {
-
+    	 
         if (line.length() == 0) {
             return;
         }
@@ -116,6 +120,7 @@ public class CsvFileReaderServiceImpl implements CVSReaderService{
 
             this.offers.add(new Offer(lender, rate, amount));
         }
+         
     }
 }
 	 

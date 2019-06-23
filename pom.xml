@@ -1,31 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.zopa.ratecalculation</groupId>
-  <artifactId>zopa-caluclations</artifactId>
+  <artifactId>zopaCalculations</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <name>rate-caluclations-system</name>
+  <name>zopaCalculations</name>
   <url>http://maven.apache.org</url>
-    
+  
+     
   <properties>
-        <java.source.versione>1.8</java.source.versione>
-	    <java.target.versione>1.8</java.target.versione>
-    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<junit.versione>4.4</junit.versione>
-		<maven.versione>3.7.0</maven.versione>
-		<spring.version>5.0.6.RELEASE</spring.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <candidateName>MASSIMO.SPOSATO</candidateName>
+        <jdk.version>1.8</jdk.version>
+        <log4j.version>1.2.17</log4j.version>
+        <junit.version>4.12</junit.version>
   </properties>
 	
   <dependencies>
-   <!-- Spring dependencies -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		 
+  	 
   	<dependency>
 	    <groupId>com.opencsv</groupId>
 	    <artifactId>opencsv</artifactId>
@@ -35,48 +28,62 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
-		</dependency>
-		<dependency>
+	</dependency>
+	<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.versione}</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.3</version>
-        </dependency>
+	   <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
   </dependencies>
   
-  <build>
-    <directory>${project.basedir}/target</directory>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-    <finalName>${project.artifactId}</finalName>
-    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>${project.basedir}/src/main/scripts</scriptSourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-    </testResources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.versione}</version>
-         <configuration>
-                  <source>${java.source.versione}</source>
-                  <target>${java.target.versione}</target>
-         </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <finalName>RateCalculation</finalName>
+        <plugins>
+             <!-- download source code in Eclipse, best practice -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<!-- Set a JDK compiler level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+            
+            <!-- Make this jar executable -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+				  <!-- DO NOT include log4j.properties file in your Jar -->
+				  <excludes>
+					<exclude>**/log4j.properties</exclude>
+				  </excludes>
+				  <archive>
+					<manifest>
+						<!-- Jar file entry point -->
+						<mainClass>com.zopa.ratecalculation.client.Application</mainClass>
+					</manifest>
+				  </archive>
+				</configuration>
+			</plugin>
+           
+        </plugins>
+    </build>
 </project>

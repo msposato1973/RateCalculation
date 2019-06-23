@@ -25,9 +25,18 @@ You need to install the following tools
 * [Java 1.8](http://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html) - Lambda and Annotation were used in the code
 * [Maven](https://maven.apache.org/) - Dependency Management
 
+## Building the code:
+* Clone from git or unzip the supplied zip file, open shall ms dos and navigate to the root location of the project, where the POM is.
+
 ## Running the Application locally
 1. Duration, Maximum and minimum loan amount are confiurable in a constant class
 2. Sample MarketDataforExercise.csv file is kept at src\test\resources
+
+## Running the App
+* Sample test file is located at /src/test/resources
+From the root path, run the following commands:
+
+* mvn exec:java -Dexec.mainClass=com.zopa.ratecalculation.client.Application -Dexec.args="src/test/resources/MarketDataforExercise.csv 1500"
 
 From the folder where jar is kept run below file via command prompt
 

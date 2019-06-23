@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.zopa.ratecalculation.constant.QuoteConstant;
 import com.zopa.ratecalculation.exception.InsufficientLoanAmountException;
 import com.zopa.ratecalculation.exception.InvalideQuoteException;
@@ -25,26 +27,28 @@ import com.zopa.ratecalculation.service.impl.QuoteCalculationService;
  */
 public class CommandServiceImpl  implements CommandService{
 
+	 
  
 	private CVSReaderService cvsReaderService;
 	private CalculationService calculationService;
 	private LoanValidationService validationService ;
 	
+	public CommandServiceImpl() {}
 	
 	@Override
 	public List<Offer> invoceCvsReaderService(String csvFile) throws IOException {
 		// TODO Auto-generated method stub
-		
+		 
 		cvsReaderService = new CsvFileReaderServiceImpl(csvFile);
 		List<Offer> offers = cvsReaderService.getAvailableOffers();
 	 	
-		return offers;
+		 return offers;
 	}
 	 
 	@Override
 	public boolean invoceLoanValidationService(String loanAmount) throws InsufficientLoanAmountException {
 		// TODO Auto-generated method stub
-		
+	 	
 		 boolean validation = false;
 		 validationService = new LoanValidationServiceImpl();
 		
@@ -54,13 +58,12 @@ public class CommandServiceImpl  implements CommandService{
 		 validation = validationService.validate(new Loan(new BigDecimal(loanAmount)));
 		 if(!validation) throw new InsufficientLoanAmountException(QuoteConstant.OFF_ERR_MESSAGE);
 		  
-		return validation;
+		 return validation;
 	}
 	
 	@Override
 	public Quote ivoceCalculationService(Loan loan, List<Offer> offerList) throws NoAvailableOffersException, IOException {
-		
-		// TODO Auto-generated method stub
+		 // TODO Auto-generated method stub
 		List<Offer> offers = cvsReaderService.getLoanOffers(loan.getRequestedAmount(), offerList);
 		calculationService = new QuoteCalculationService(loan, offers);
 		
@@ -69,6 +72,7 @@ public class CommandServiceImpl  implements CommandService{
 	 
 	
 	public  void printQuote(Quote quote) throws InvalideQuoteException{
+		  
 		 if(quote!=null) {
 	    	 
 	    	 System.out.println(QuoteConstant.MSG_RA + String.format("%.0f", quote.getRequestedAmount()));
@@ -79,6 +83,8 @@ public class CommandServiceImpl  implements CommandService{
 		 } else {
 	    	 throw new InvalideQuoteException(QuoteConstant.ERR_NO_QUOTE);
 	     }
+		 
+		 
 	} 
      
     

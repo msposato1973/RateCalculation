@@ -2,6 +2,8 @@ package com.zopa.ratecalculation.service.impl;
 
 import java.math.BigDecimal;
 
+import org.apache.log4j.Logger;
+
 import com.zopa.ratecalculation.constant.QuoteConstant;
 import com.zopa.ratecalculation.exception.InvalidRequestAmountException;
 import com.zopa.ratecalculation.model.Loan;
@@ -9,6 +11,8 @@ import com.zopa.ratecalculation.service.LoanValidationService;
 
 
 public class LoanValidationServiceImpl implements LoanValidationService {
+	
+	//private static final Logger logger = Logger.getLogger(LoanValidationServiceImpl.class);
 
 	public LoanValidationServiceImpl() {}
 	 

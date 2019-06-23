@@ -11,22 +11,13 @@ import com.zopa.ratecalculation.model.Offer;
 import com.zopa.ratecalculation.model.Quote;
 
 public interface CommandService {
-	
-	 
-	default List<Offer> invoceCvsReaderService(String csvFile) throws IOException {
-		return null;
-	}
-	 
-	default boolean invoceLoanValidationService(String loanAmount) throws InsufficientLoanAmountException {
-		return false;
-	}
-	
-	default		Quote ivoceCalculationService(Loan loan, List<Offer> offers) throws NoAvailableOffersException, IOException {
-		return null;
-	}
-		
-	
-	default void printQuote(Quote quote) throws InvalideQuoteException{
-	}
-	
+
+	List<Offer> invoceCvsReaderService(String csvFile) throws IOException;
+
+	boolean invoceLoanValidationService(String loanAmount) throws InsufficientLoanAmountException;
+
+	Quote ivoceCalculationService(Loan loan, List<Offer> offerList) throws NoAvailableOffersException, IOException;
+
+	void printQuote(Quote quote) throws InvalideQuoteException;
+
 }

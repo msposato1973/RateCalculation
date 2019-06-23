@@ -18,8 +18,8 @@ import com.zopa.ratecalculation.service.CalculationService;
  */
 public class QuoteCalculationService implements CalculationService {
 	      
-    private final Loan loan;
-    private final List<Offer> offers;
+	//private static final Logger logger  = Logger.getLogger(QuoteCalculationService.class);
+     private final List<Offer> offers;
 
    
     /**
@@ -28,7 +28,6 @@ public class QuoteCalculationService implements CalculationService {
      */
     public QuoteCalculationService(Loan loan, List<Offer> offers){
 
-        this.loan = loan;
         this.offers = offers;
     }
 
@@ -37,10 +36,10 @@ public class QuoteCalculationService implements CalculationService {
      */
     @Override
     public double getAverageRate() {
-        double averageRate = this.offers.stream().mapToDouble(t -> t.getRate()).average().getAsDouble();
+    	 double averageRate = this.offers.stream().mapToDouble(t -> t.getRate()).average().getAsDouble();
 
         // set to 1 decimal places
-        return Math.round(averageRate * 1000.0)/1000.0;
+         return Math.round(averageRate * 1000.0)/1000.0;
     }
 
     /**
@@ -52,8 +51,7 @@ public class QuoteCalculationService implements CalculationService {
      */
     @Override
     public BigDecimal getMonthlyPayment() {
-        
-       
+    	 
         this.offers.forEach(offer -> {
              double offerMonthlyRate = offer.getRate()/12;
              BigDecimal offerMonthlyPayment = (offer.getNeededAmount().multiply(BigDecimal.valueOf(offerMonthlyRate))
@@ -68,7 +66,7 @@ public class QuoteCalculationService implements CalculationService {
             totalMonthly = totalMonthly.add(offer.getMonthlyPayment());
         }
 
-        return totalMonthly.setScale(2, RoundingMode.UNNECESSARY);
+          return totalMonthly.setScale(2, RoundingMode.UNNECESSARY);
     }
 
     /**
