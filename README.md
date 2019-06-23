@@ -27,6 +27,7 @@ You need to install the following tools
 
 ## Building the code:
 * Clone from git or unzip the supplied zip file, open shall ms dos and navigate to the root location of the project, where the POM is.
+* Building jar: \RateCalculation\target\RateCalculation.jar
 
 ## Running the Application locally
 1. Duration, Maximum and minimum loan amount are confiurable in a constant class
@@ -42,14 +43,13 @@ From the folder where jar is kept run below file via command prompt
 
 ###  java -jar "Absolute path of MarketDataforExercise.csv" "Loan amount"
 ### Example:: 
-java -jar RateCalculation C:\Users\maxp\git\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
+java -jar \RateCalculation\target\RateCalculation.jar C:\..\RateCalculation\src\test\resources\MarketDataforExercise.csv 1500
 
 ## Testing
 This application is built using TDD methodology and tests are written in Junit
 
 ### TODO
-1.Can be converted into Spring boot Application if enhacement comes
-2.Logs implementation
+1.Logs implementation
 
 ## The application should produce output in the form example:
 Requested amount: £1000

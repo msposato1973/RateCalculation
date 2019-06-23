@@ -37,9 +37,7 @@ public class Application {
     	 List<Offer> offerList = null;
     	 try {
     		 
-    		 loggerApplication.debug("Offers should only be obtained if request is valid");
-    		 loggerApplication.debug("Create and initialize the calculation service");
-    		 loggerApplication.debug("Create and initialize the offer service");
+    		    
     	 	 
     		 if (args.length < 2 ) {
     				throw new IllegalArgumentException(QuoteConstant.ERR);

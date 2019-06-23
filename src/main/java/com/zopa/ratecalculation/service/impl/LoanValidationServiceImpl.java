@@ -2,8 +2,6 @@ package com.zopa.ratecalculation.service.impl;
 
 import java.math.BigDecimal;
 
-import org.apache.log4j.Logger;
-
 import com.zopa.ratecalculation.constant.QuoteConstant;
 import com.zopa.ratecalculation.exception.InvalidRequestAmountException;
 import com.zopa.ratecalculation.model.Loan;
