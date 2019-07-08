@@ -44,7 +44,7 @@ public class Application {
     		 }else if((args[0] ==null || args[0].equals(""))) {
     				throw new IllegalArgumentException(QuoteConstant.ERR);
     		 }else if((args[1] ==null || args[1].equals(""))) {
-    			 throw new IllegalArgumentException(QuoteConstant.ERR_LOAN);
+    			    throw new IllegalArgumentException(QuoteConstant.ERR_LOAN);
     		 }
     		 
 			 String filePath = new  String(args[0]);
