@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.zopa.ratecalculation.constant.QuoteConstant;
 import com.zopa.ratecalculation.exception.InsufficientLoanAmountException;
 import com.zopa.ratecalculation.exception.InvalideQuoteException;
